@@ -1,0 +1,104 @@
+*{margin:0;padding: 0;}
+.row{
+    position: relative;
+}
+.row:after{ content: "";clear: both;display: block;}
+
+/* 슬라이더 기본 위치 */
+#list{ position: relative; margin-top: -200px;}
+#list li{ width: 200px; height:200px; list-style: none;}
+#list img{ border: 1px solid;}
+
+.active{ background-color: yellow;}
+li[data-roll="2"]{}
+
+#slot_box1{
+    position:relative;
+    width: 200px;height: 600px;
+    overflow:hidden;
+    display: inline-block;
+}
+#slot_box2{
+    position:relative;
+    width: 200px;height: 600px;
+    overflow:hidden;
+    display: inline-block;
+}
+#slot_box3{
+    position:relative;
+    width: 200px;height: 600px;
+    overflow:hidden;
+    display: inline-block;
+}
+#slot_box4{
+    position:relative;
+    width: 200px;height: 600px;
+    overflow:hidden;
+    display: inline-block;
+}
+#list li{
+    background: url("c.png");
+    background-size: 686px 744px;
+}
+.colum1{
+    border-radius: 25px;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(197,188,144,1) 100%);
+    border: 6px double #917b54;
+}
+/*background-size: 800px 793px*/
+#list li[data-roll="1"]{ background-position: -3px -27px;}
+#list li[data-roll="2"]{ background-position: -251px -15px;}
+#list li[data-roll="3"]{ background-position: -489px -14px}
+#list li[data-roll="4"]{ background-position: -8px -277px;}
+#list li[data-roll="5"]{background-position: -245px -273px;}
+#list li[data-roll="6"]{background-position: -489px -273px;}
+#list li[data-roll="7"]{background-position: -251px -525px;}
+#list li[data-roll="8"]{background-position: -488px -537px;}
+
+@media screen and (min-width: 800px){
+    #list{ position: relative; margin-top: -230px;}
+    #slot_box1{
+        position:relative;
+        width: 115px;
+        height: 350px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #slot_box2{
+        position:relative;
+        width: 115px;
+        height: 350px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #slot_box3{
+        position:relative;
+        width: 115px;
+        height: 350px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #slot_box4{
+        position:relative;
+        width: 115px;
+        height: 350px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #list {
+        margin-top: -118px;
+    }
+    #list li {
+        width: 115px;
+        height: 115px;
+        background-size: 347px 454px
+    }
+    #list li[data-roll="1"]{ background-position: -1px -9px;}
+    #list li[data-roll="2"]{ background-position: -235px -15px;}
+    #list li[data-roll="3"]{ background-position: -468px -14px;}
+    #list li[data-roll="4"]{background-position: -1px -320px;}
+    #list li[data-roll="5"]{background-position: -236px -325px;}
+    #list li[data-roll="6"]{ background-position: -474px -329px;}
+    #list li[data-roll="7"]{background-position: -241px -621px;}
+    #list li[data-roll="8"]{background-position: -471px -622px;}
+}
