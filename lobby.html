@@ -179,7 +179,7 @@
     </clipPath>
   </defs>
 </svg></div>
-                        <p class="p2">9553115</p>
+                        <p id="Gold" class="p2">9553115</p>
                     </div>
                 </div>
             </div>
@@ -187,8 +187,8 @@
     </header>
      <div class="slider">
       <div class="slider-items">
-<a href="win_cash.html" class="slider-item"><div></div></a>
-<a href="royal_Coins.html" class="slider-item"><div>
+<a href="win_cash/win_cash.html" class="slider-item"><div></div></a>
+<a href="royal_coins/royal_Coins.html" class="slider-item"><div>
 </div></a>
 <a class="slider-item">
     <svg xmlns="http://www.w3.org/2000/svg" width="82" height="95" viewBox="0 0 82 95" fill="none">
@@ -261,7 +261,8 @@
 </a>
 </div>
  </div>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+ <script>
      $(document).ready(function(){
     initCustomSlider();
         });
@@ -296,6 +297,180 @@ function initCustomSlider() {
         slider.scrollLeft = scrollLeft - walk;
     });
 }
-     </script>
+
+      var stav = 0;
+      var win_count = 0;
+      var win = 0;
+      var gold = 100000;
+      var auto_flag = false;
+
+      if(localStorage.getItem('gold')){
+        try{
+          this.gold = JSON.parse(localStorage.getItem('gold'))
+        }catch (e){
+          localStorage.getItem('gold')
+        }
+      }
+      function savePosts(){
+        let parsed = JSON.stringify(this.gold)
+        localStorage.setItem('gold', parsed)
+      }
+
+      $('#stav').html(stav);
+      $('#win_count').html(win_count);
+      $('#Gold').html(gold);
+
+      function slotRoller(spd, selector) {
+        var speed = 80; // slot скорость вращения
+        var firstChild = $("#list li:first-child");
+        lastChild = $("#list li:last-child");
+        win = 0
+        win_count = 0
+        var stav_flag = 0
+
+        $('#win_count').html(win_count);
+        // slot цикл по списку
+        $(selector).animate({
+          marginTop: "-400px"
+        }, speed + (spd * 30 + spd), "linear", function(){
+          // Переместить первый список в последний
+          firstChild = $("li:first-child", this);
+          $(this).append(firstChild);
+          $(this).css({ marginTop: "-200px"});
+          if ($('#slot_box1 #list').is(':not(:animated)')
+                  && $('#slot_box2 #list').is(':not(:animated)')
+                  && $('#slot_box3 #list').is(':not(:animated)')
+                  && $('#slot_box4 #list').is(':not(:animated)')){
+
+            var symbol_no1 = $('li:nth-child(2)', '#slot_box1').attr('data-roll');
+            var symbol_no2 = $('li:nth-child(2)', '#slot_box2').attr('data-roll');
+            var symbol_no3 = $('li:nth-child(2)', '#slot_box3').attr('data-roll');
+            var symbol_no4 = $('li:nth-child(2)', '#slot_box4').attr('data-roll');
+            var win_symbol = 0
+
+            if(symbol_no1 == symbol_no2 && symbol_no3 == symbol_no4 && symbol_no1 == symbol_no3){
+              win--
+              if (win == -1){
+                console.log('win!')
+                gold = gold + (stav * 5)
+                win_count = stav * 5
+                window.localStorage.setItem('_gold', gold);
+                savePosts()
+
+                $('#win_count').html(win_count);
+                $('#Gold').html(gold);
+              }
+            }
+            else {
+              win--
+              if (win == -1) {
+                console.log('lose')
+                if (gold > 0){
+                  gold = gold - stav;
+                  $('#Gold').html(gold);
+                  savePosts()
+
+                  console.log(stav, gold)
+                }
+              }
+            }
+            // $('#symbol_no1').html("symbol No: " + symbol_no1);
+            // $('#symbol_no2').html("symbol No: " + symbol_no2);
+          }
+        });
+
+
+
+      }
+
+
+      function Slot_roll(slotName){
+        this.min = 12;
+        this.max = 18;
+        this.dice = function(){
+          var dice = Math.round(Math.random() * (this.max - this.min)) + this.min;
+          for (var i = 0; i < dice; i++) {
+            slotRoller(i, slotName);
+          }
+          console.log(dice);
+        }
+      }
+
+
+      var slot_roll1 = new Slot_roll('#slot_box1 #list');
+      var slot_roll2 = new Slot_roll('#slot_box2 #list');
+      var slot_roll3 = new Slot_roll('#slot_box3 #list');
+      var slot_roll4 = new Slot_roll('#slot_box4 #list');
+
+
+      $('#btn_r').on( "click", function(){
+        // 애니메이션이 재생중이 아닐 때만 돌리고!!
+        if( $('#slot_box1 #list').is(':not(:animated)')
+                && $('#slot_box2 #list').is(':not(:animated)')
+                && $('#slot_box3 #list').is(':not(:animated)')
+                && $('#slot_box4 #list').is(':not(:animated)')
+        ){
+          slot_roll1.dice();
+          slot_roll2.dice();
+          slot_roll3.dice();
+          slot_roll4.dice();
+        }
+      });
+      function increment(inc){
+        console.log(inc + 10)
+        if (inc === '+'){
+          if (stav != 999999){
+            stav += 10
+            $('#stav').html(stav);
+          }
+        }
+        if(inc === '-'){
+          if (stav != 0){
+            stav -= 10
+            $('#stav').html(stav);
+          }
+          if(stav < 0){
+            stav = 0
+            $('#stav').html(stav);
+          }
+        }
+      }
+      function autoClick(){
+        auto_flag = auto_flag
+        console.log(auto_flag, 'auto')
+        if (auto_flag){
+          let i = 0
+          while (i = 100){
+            if (auto_flag){
+              if( $('#slot_box1 #list').is(':not(:animated)')
+                      && $('#slot_box2 #list').is(':not(:animated)')
+                      && $('#slot_box3 #list').is(':not(:animated)')
+                      && $('#slot_box4 #list').is(':not(:animated)')
+              ){
+                slot_roll1.dice();
+                slot_roll2.dice();
+                slot_roll3.dice();
+                slot_roll4.dice();
+                i++
+              }
+            }
+          }
+        }
+        if (!auto_flag){
+
+        }
+      }
+      if(localStorage.getItem('gold')){
+        try{
+          this.gold = JSON.parse(localStorage.getItem('gold'))
+        }catch (e){
+          localStorage.getItem('gold')
+        }
+      }
+      function savePosts(){
+        let parsed = JSON.stringify(this.gold)
+        localStorage.setItem('gold', parsed)
+      }
+    </script>
  </body>
 </html>

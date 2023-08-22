@@ -365,7 +365,7 @@ background-clip: text;
     width: 69px;
     margin: 10px 5px;
 }
-#it1{
+.colum1{
     border-radius: 25px;
     background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(197,188,144,1) 100%);
     border: 6px double #917b54;
@@ -387,4 +387,51 @@ border: 1px solid #FFE600;
 .play .container .colum .item img{
     width: 209px;
 }
+}
+@media (max-width: 800px){
+
+    #slot_box1{
+        position:relative;
+        width: 140px;
+        height: 400px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #slot_box2{
+        position:relative;
+        width: 140px;
+        height: 400px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #slot_box3{
+        position:relative;
+        width: 140px;
+        height: 400px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #slot_box4{
+        position:relative;
+        width: 140px;
+        height: 400px;
+        overflow:hidden;
+        display: inline-block;
+    }
+    #list {
+        margin-top: -118px;
+    }
+    #list li {
+        width: 124px;
+        height: 124px;
+        background-size: 354px 443px;
+    }
+    #list li[data-roll="1"]{ background-position: 13px -17px;}
+    #list li[data-roll="2"]{ background-position: -235px -15px;}
+    #list li[data-roll="3"]{ background-position: -468px -14px;}
+    #list li[data-roll="4"]{ background-position: 6px -297px;}
+    #list li[data-roll="5"]{background-position: -233px -295px;}
+    #list li[data-roll="6"]{background-position: -467px -293px;}
+    #list li[data-roll="7"]{background-position: -240px -595px;}
+    #list li[data-roll="8"]{background-position: -473px -589px;}
 }
